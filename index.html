@@ -164,6 +164,21 @@
     color: var(--error);
   }
 
+  .demo-note {
+    margin-top: 24px;
+    padding: 10px 14px;
+    border-radius: 2px;
+    border: 1px dashed var(--grey-line);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--grey);
+    text-align: center;
+  }
+
+  .demo-note strong {
+    color: var(--pink);
+  }
+
   @media (max-width: 480px) {
     .row { flex-direction: column; gap: 0; }
     h1 { font-size: 34px; }
@@ -221,6 +236,8 @@
 
     <div class="status" id="statusBox"></div>
   </form>
+
+  <p class="demo-note"><strong>Demo page.</strong> This form is part of a live automation demo. Submissions are stored for testing and may be cleared periodically.</p>
 </div>
 
 <script>
