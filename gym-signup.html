@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Class</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --bg-card: #161616;
+    --pink: #EFA8C6;
+    --white: #FFFFFF;
+    --grey: #8A8A8A;
+    --grey-line: rgba(255,255,255,0.08);
+    --error: #E8806B;
+    --success: #A8E0BE;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--grey-line);
+    border-radius: 4px;
+    max-width: 460px;
+    width: 100%;
+    padding: 44px 36px;
+  }
+
+  .eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    margin: 0 0 16px;
+    color: var(--white);
+  }
+
+  h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--white);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--grey);
+    margin: 0 0 32px;
+    line-height: 1.6;
+  }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 8px;
+  }
+
+  .field { margin-bottom: 18px; }
+
+  input, select {
+    width: 100%;
+    padding: 13px 14px;
+    background: transparent;
+    border: 1px solid var(--grey-line);
+    border-radius: 2px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.15s ease;
+  }
+
+  input::placeholder { color: rgba(255,255,255,0.3); }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--pink);
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath fill='%23EFA8C6' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  select option {
+    background: var(--bg-card);
+    color: var(--white);
+  }
+
+  .row { display: flex; gap: 14px; }
+  .row .field { flex: 1; }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    background: var(--pink);
+    color: #1A1A1A;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+
+  button:hover { opacity: 0.85; }
+  button:active { transform: scale(0.98); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 2px;
+    font-size: 13px;
+    text-align: center;
+    display: none;
+  }
+
+  .status.success {
+    display: block;
+    background: rgba(168,224,190,0.1);
+    border: 1px solid var(--success);
+    color: var(--success);
+  }
+
+  .status.error {
+    display: block;
+    background: rgba(232,128,107,0.1);
+    border: 1px solid var(--error);
+    color: var(--error);
+  }
+
+  @media (max-width: 480px) {
+    .row { flex-direction: column; gap: 0; }
+    h1 { font-size: 34px; }
+    .card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <p class="eyebrow">Book Classes</p>
+  <h1>Reserve<br>your <span>spot</span></h1>
+  <p class="subtitle">Pick a session below and we'll lock it in. A confirmation lands in your inbox right after.</p>
+
+  <form id="bookingForm">
+    <div class="field">
+      <label for="memberName">Your Name</label>
+      <input type="text" id="memberName" name="memberName" placeholder="e.g. Alex Tan" required>
+    </div>
+
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+    </div>
+
+    <div class="field">
+      <label for="className">Class</label>
+      <select id="className" name="className" required>
+        <option value="" disabled selected>Choose a class</option>
+        <option value="Outdoor Run">Outdoor Run</option>
+        <option value="Hiit Rhythm">Hiit Rhythm</option>
+        <option value="Yoga for Lifters">Yoga for Lifters</option>
+        <option value="Hip and Back Release">Hip and Back Release</option>
+        <option value="Kettlebell Strength">Kettlebell Strength</option>
+        <option value="Hyrox Hustle">Hyrox Hustle</option>
+        <option value="Body Combat">Body Combat</option>
+        <option value="Yogalates">Yogalates</option>
+        <option value="Spin Class">Spin Class</option>
+        <option value="Body Pump">Body Pump</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="classDate">Date</label>
+        <input type="date" id="classDate" name="classDate" required>
+      </div>
+      <div class="field">
+        <label for="classTime">Time</label>
+        <input type="time" id="classTime" name="classTime" required>
+      </div>
+    </div>
+
+    <button type="submit" id="submitBtn">Book Your Spot</button>
+
+    <div class="status" id="statusBox"></div>
+  </form>
+</div>
+
+<script>
+  const WEBHOOK_URL = "PASTE_YOUR_MAKE_WEBHOOK_URL_HERE";
+
+  const form = document.getElementById('bookingForm');
+  const statusBox = document.getElementById('statusBox');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    statusBox.className = 'status';
+    statusBox.textContent = '';
+
+    const payload = {
+      memberName: document.getElementById('memberName').value,
+      email: document.getElementById('email').value,
+      className: document.getElementById('className').value,
+      classDate: document.getElementById('classDate').value,
+      classTime: document.getElementById('classTime').value,
+      reminderSent: "FALSE"
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Booking...";
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        statusBox.className = 'status success';
+        statusBox.textContent = "You're booked! Check your email for confirmation.";
+        form.reset();
+      } else {
+        throw new Error('Request failed');
+      }
+    } catch (err) {
+      statusBox.className = 'status error';
+      statusBox.textContent = "Something went wrong. Please try again or contact the studio directly.";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Book Your Spot";
+    }
+  });
+</script>
+
+</body>
+</html>
